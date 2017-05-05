@@ -111,10 +111,11 @@ fi
 if [[ -z "$(which docker)" ]];
 then
     echo "Installing Docker"
+    groupadd docker
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian jessie stable"
-    sudo apt-get update
-    sudo apt-get install docker-ce -y
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian jessie stable"
+    apt-get update
+    apt-get install docker-ce -y
 else
     echo "Docker already installed"
 fi
@@ -155,7 +156,7 @@ then
     echo "Installing Nginx"
     echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list.d/nginx.list
     echo "deb-src http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list.d/nginx.list
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
     apt update
     apt install nginx -y
     openssl dhparam 2048 -out /etc/nginx/dhparam.pem
@@ -204,6 +205,10 @@ then
     sed -i -E "s/<server( .*?)\/>/<server \1>\n    <security>\n      <passwordFile path='\/etc\/go\/passwd' \/>\n    <\/security>\n  <\/server>/" /etc/go/cruise-config.xml
     # restart
     /etc/init.d/go-server restart
+
+    # add go user to docker group
+    gpasswd -a go docker
+    /etc/init.d/docker restart
 else
     echo "Go CD already installed"
 fi
