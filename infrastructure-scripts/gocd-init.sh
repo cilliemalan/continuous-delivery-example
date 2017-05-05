@@ -92,7 +92,7 @@ else
 fi
 
 # terraform
-if [[ -z "$(which node)" ]];
+if [[ -z "$(which terraform)" ]];
 then
     echo "Installing Terraform"
     wget https://releases.hashicorp.com/terraform/0.9.4/terraform_0.9.4_linux_amd64.zip -O /tmp/terraform.zip
