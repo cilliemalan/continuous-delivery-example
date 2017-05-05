@@ -3,16 +3,18 @@
 # WARNING: if you change this file your GOCD server will be
 # wiped and recreated from SCRATCH
 
+
 # some deps
 if [[ -z "$(which gcc)" ]];
 then
     echo "Updating deps"
     apt update
-    apt install software-properties-common git apt-transport-https dnsutils unzip -y
+    apt install software-properties-common git apt-transport-https dnsutils unzip ca-certificates gnupg2 -y
     apt install build-essential curl m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev -y
 else
     echo "Not updating deps"
 fi
+
 
 # update DNS
 cat > /root/update-dns.sh <<'eofscript'
@@ -78,6 +80,7 @@ eofscript
 chmod +x /root/update-dns.sh
 /root/update-dns.sh
 
+
 # nodeJS
 if [[ -z "$(which node)" ]];
 then
@@ -90,6 +93,7 @@ then
 else
     echo "Node already installed"
 fi
+
 
 # terraform
 if [[ -z "$(which terraform)" ]];
