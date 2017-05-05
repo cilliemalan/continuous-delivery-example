@@ -107,6 +107,30 @@ else
 fi
 
 
+# docker
+if [[ -z "$(which docker)" ]];
+then
+    echo "Installing Docker"
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian jessie stable"
+    sudo apt-get update
+    sudo apt-get install docker-ce -y
+else
+    echo "Docker already installed"
+fi
+
+
+# kubectl
+if [[ -z "$(which kubectl)" ]];
+then
+    echo "Installing kubectl"
+    curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    chmod +x /usr/bin/kubectl
+else
+    echo "kubectl already installed"
+fi
+
+
 # java
 if [[ -z "$(which java)" ]];
 then
