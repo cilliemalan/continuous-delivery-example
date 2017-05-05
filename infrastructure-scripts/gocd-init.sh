@@ -196,6 +196,7 @@ then
     PLUGIN_DIR=/var/lib/go-server/plugins/external
     wget https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/0.4.0/yaml-config-plugin-0.4.0.jar -O "$PLUGIN_DIR/yaml-config-plugin-0.4.0.jar"
     wget https://github.com/tomzo/gocd-json-config-plugin/releases/download/0.2.0/json-config-plugin-0.2.jar -O "$PLUGIN_DIR/json-config-plugin-0.2.jar"
+    wget https://github.com/gocd-contrib/script-executor-task/releases/download/0.3/script-executor-0.3.0.jar -O "$PLUGIN_DIR/script-executor-0.3.0.jar"
     
     # set admin password
     ADMIN_PASSWORD="cdpasswd"
