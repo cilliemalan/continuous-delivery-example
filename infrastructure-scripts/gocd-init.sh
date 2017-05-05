@@ -8,9 +8,9 @@
 if [[ -z "$(which gcc)" ]];
 then
     echo "Updating deps"
-    apt update
-    apt install software-properties-common git apt-transport-https dnsutils unzip ca-certificates gnupg2 -y
-    apt install build-essential curl m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev -y
+    apt-get update
+    apt-get install software-properties-common git apt-transport-https dnsutils unzip ca-certificates gnupg2 -y
+    apt-get install build-essential curl m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev -y
 else
     echo "Not updating deps"
 fi
@@ -86,8 +86,8 @@ if [[ -z "$(which node)" ]];
 then
     echo "Installing Node"
     curl -o- https://deb.nodesource.com/setup_7.x | bash
-    apt update
-    apt install nodejs -y
+    apt-get update
+    apt-get install nodejs -y
     # some useful things
     npm install -g -y bower grunt gulp
 else
@@ -117,8 +117,8 @@ then
     # accept agreement
     echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
     echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
-    apt update
-    apt install oracle-java8-installer oracle-java8-set-default -y
+    apt-get update
+    apt-get install oracle-java8-installer oracle-java8-set-default -y
     java -version
 else
     echo "Java already installed"
@@ -162,8 +162,8 @@ then
     echo "Installing Go CD"
     echo "deb https://download.gocd.io /" > /etc/apt/sources.list.d/gocd.list
     curl -s https://download.gocd.io/GOCD-GPG-KEY.asc | apt-key add -
-    apt update 
-    apt install go-server go-agent -y
+    apt-get update 
+    apt-get install go-server go-agent -y
     # start
     /etc/init.d/go-server start
     /etc/init.d/go-agent start
